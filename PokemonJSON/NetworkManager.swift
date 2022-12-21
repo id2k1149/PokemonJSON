@@ -20,5 +20,24 @@ enum List: String {
 class NetworkManager {
     static let shared = NetworkManager()
     
+    func fetchPokemons(url: String, completion: @escaping([Pokemon]) -> Void) {
+        guard let url = URL(string: url) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, urlResponse, error in
+            guard let data = data else { return }
+            
+            do {
+                let decoder = JSONDecoder()
+                let pokemonApp = try decoder.decode(PokemonApp.self, from: data)
+                completion(pokemonApp.results)
+            } catch {
+                print(error)
+            }
+        }
+        
+        
+        
+    }
+    
     private init(){}
 }

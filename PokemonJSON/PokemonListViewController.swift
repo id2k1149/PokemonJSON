@@ -9,6 +9,8 @@ import UIKit
 
 class PokemonListViewController: UITableViewController {
     
+    var pokemons: [Pokemon] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
