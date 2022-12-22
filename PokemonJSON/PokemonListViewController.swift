@@ -33,7 +33,6 @@ extension PokemonListViewController{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as? PokemonViewCell else { return UITableViewCell() }
         
         let pokemon = pokemons[indexPath.row]
-        print(indexPath.row)
         
         cell.configur(pokemon: pokemon)
 
