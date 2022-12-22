@@ -19,19 +19,23 @@ enum urlList: String {
 
 class NetworkManager {
     static let shared = NetworkManager()
+    private init(){}
     
-    func fetchPokemons(url: String, completion: @escaping([Pokemon]) -> Void) {
+    func fetch<T: Decodable>(dataType: T.Type,
+                  url: String,
+                  completion: @escaping(T) -> Void) {
+        
         guard let url = URL(string: url) else { return }
         
-        URLSession.shared.dataTask(with: url) { data, urlResponse, error in
+        URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else { return }
             
             do {
                 let decoder = JSONDecoder()
-                let pokemonApp = try decoder.decode(PokemonApp.self, from: data)
+                let type = try decoder.decode(T.self, from: data)
                 
                 DispatchQueue.main.async {
-                    completion(pokemonApp.results)
+                    completion(type)
                 }
                 
             } catch {
@@ -40,11 +44,15 @@ class NetworkManager {
         }.resume()
     }
     
-    func fetchImage(from url: String, completion: @escaping(Data) -> Void) {
+    func fetchImage(from url: String,
+                    completion: @escaping(Data) -> Void) {
         guard let url = URL(string: url) else { return }
-        guard let imageData = try? Data(contentsOf: url) else { return }
-        completion(imageData)
+        
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+                completion(imageData)
+            }
+        }
     }
-    
-    private init(){}
 }

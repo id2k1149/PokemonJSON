@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonApp: Decodable {
+struct PokeAPI: Decodable {
     let results: [Pokemon]
 }
 
@@ -16,23 +16,18 @@ struct Pokemon: Decodable {
     let url: String
 }
 
- struct PokemonURL: Decodable {
- let sprites: Sprites
- }
+struct PokemonURL: Decodable {
+    let sprites: Sprites
+}
  
- struct Sprites: Decodable {
- let other: Other
- }
+struct Sprites: Decodable {
+    let other: Other
+}
  
- struct Other: Decodable {
- let home: Home
- }
+struct Other: Decodable {
+    let home: Home
+}
  
- struct Home: Decodable {
- let front: Front
- }
- 
- struct Front: Decodable {
- let front_default: String
- }
- 
+struct Home: Decodable {
+    let front_default: String
+}

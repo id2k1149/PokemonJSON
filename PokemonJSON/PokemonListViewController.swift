@@ -17,8 +17,8 @@ class PokemonListViewController: UITableViewController {
     }
     
     private func fetchPokemons() {
-        NetworkManager.shared.fetchPokemons(url: urlList.url.rawValue) { pokemons in
-            self.pokemons = pokemons
+        NetworkManager.shared.fetch(dataType: PokeAPI.self, url: urlList.url.rawValue) { pokemonAPI in
+            self.pokemons = pokemonAPI.results
             self.tableView.reloadData()
         }
     }
@@ -34,7 +34,7 @@ extension PokemonListViewController{
         
         let pokemon = pokemons[indexPath.row]
         
-        cell.configur(pokemon: pokemon)
+        cell.configure(pokemon: pokemon)
 
         return cell
     }
