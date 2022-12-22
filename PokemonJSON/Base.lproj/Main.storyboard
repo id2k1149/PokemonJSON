@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Pokemons-->
         <scene sceneID="pcv-b1-bsx">
             <objects>
                 <tableViewController id="TDy-eq-gNQ" customClass="PokemonListViewController" customModule="PokemonJSON" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,13 +16,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pokemonCell" id="NSS-PS-HKI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pokemonCell" id="NSS-PS-HKI" customClass="PokemonViewCell" customModule="PokemonJSON" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NSS-PS-HKI" id="GPk-wz-M54">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="L0h-8H-xWM">
+                                            <rect key="frame" x="16" y="-3.6666666666666679" width="361" height="51"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mwy-Io-rcV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="51"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rp-I9-rAD">
+                                                    <rect key="frame" x="60.666666666666657" y="0.0" width="300.33333333333337" height="51"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mwy-Io-rcV" firstAttribute="height" secondItem="L0h-8H-xWM" secondAttribute="height" id="ZXe-NK-40E"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="L0h-8H-xWM" firstAttribute="centerX" secondItem="GPk-wz-M54" secondAttribute="centerX" id="5jc-3Y-EDY"/>
+                                        <constraint firstItem="L0h-8H-xWM" firstAttribute="centerY" secondItem="GPk-wz-M54" secondAttribute="centerY" id="HFo-Kh-isM"/>
+                                        <constraint firstAttribute="trailing" secondItem="L0h-8H-xWM" secondAttribute="trailing" constant="16" id="LLN-VW-hLJ"/>
+                                        <constraint firstItem="L0h-8H-xWM" firstAttribute="leading" secondItem="GPk-wz-M54" secondAttribute="leading" constant="16" id="LpW-Hh-4E2"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="1Rp-I9-rAD" id="fX0-Iq-LtX"/>
+                                    <outlet property="pokemonImageView" destination="mwy-Io-rcV" id="aSm-Df-spA"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -30,18 +59,18 @@
                             <outlet property="delegate" destination="TDy-eq-gNQ" id="tM2-7P-TBd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="WAX-c6-nDS"/>
+                    <navigationItem key="navigationItem" title="Pokemons" id="WAX-c6-nDS"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aKK-vP-gTH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="360" y="-116"/>
+            <point key="canvasLocation" x="359.5419847328244" y="-116.19718309859155"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ksn-tM-QNn">
             <objects>
                 <navigationController id="lqG-hw-Wp6" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RCN-Wh-QHp">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="RCN-Wh-QHp">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

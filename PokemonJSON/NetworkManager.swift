@@ -13,7 +13,7 @@ enum NetworkError: Error {
     case decodingError
 }
 
-enum List: String {
+enum urlList: String {
     case url = "https://pokeapi.co/api/v2/pokemon"
 }
 
@@ -29,14 +29,21 @@ class NetworkManager {
             do {
                 let decoder = JSONDecoder()
                 let pokemonApp = try decoder.decode(PokemonApp.self, from: data)
-                completion(pokemonApp.results)
+                
+                DispatchQueue.main.async {
+                    completion(pokemonApp.results)
+                }
+                
             } catch {
                 print(error)
             }
-        }
-        
-        
-        
+        }.resume()
+    }
+    
+    func fetchImage(from url: String, completion: @escaping(Data) -> Void) {
+        guard let url = URL(string: url) else { return }
+        guard let imageData = try? Data(contentsOf: url) else { return }
+        completion(imageData)
     }
     
     private init(){}

@@ -13,17 +13,29 @@ class PokemonListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchPokemons()
+    }
+    
+    private func fetchPokemons() {
+        NetworkManager.shared.fetchPokemons(url: urlList.url.rawValue) { pokemons in
+            self.pokemons = pokemons
+            self.tableView.reloadData()
+        }
     }
 }
 
 extension PokemonListViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        pokemons.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as? PokemonViewCell else { return UITableViewCell() }
+        
+        let pokemon = pokemons[indexPath.row]
+        print(indexPath.row)
+        
+        cell.configur(pokemon: pokemon)
 
         return cell
     }
